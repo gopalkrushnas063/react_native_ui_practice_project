@@ -1,14 +1,32 @@
-// /app/(tabs)/index.js
+// src/app/index.tsx
 import React from "react";
-import { View, Text } from "react-native";
-import { globalStyles } from "../../styles/global.styles";
+import { FlatList, StyleSheet, View } from "react-native";
+import ProductCard from "../../components/ProductCard";
+import { products } from "../../constants/Products";
+import { darkTheme } from "../../styles/theme";
+import useColorScheme from "../../utils/useColorScheme";
 
 const HomeScreen = () => {
+  const colorScheme = useColorScheme();
+  //   const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
+  const theme = darkTheme;
+
   return (
-    <View style={globalStyles.container}>
-      <Text style={globalStyles.text}>Dark Themed Home</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <FlatList
+        data={products}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <ProductCard product={item} />}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+});
 
 export default HomeScreen;
