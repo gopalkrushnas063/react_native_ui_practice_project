@@ -8,7 +8,6 @@ import useColorScheme from "../../utils/useColorScheme";
 
 const HomeScreen = () => {
   const colorScheme = useColorScheme();
-  //   const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
   const theme = darkTheme;
 
   return (
@@ -16,7 +15,14 @@ const HomeScreen = () => {
       <FlatList
         data={products}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <ProductCard product={item} />}
+        renderItem={({ item }) => (
+          <View style={styles.itemWrapper}>
+            <ProductCard product={item} />
+          </View>
+        )}
+        numColumns={3} // 👈 This enables the grid layout
+        columnWrapperStyle={styles.row} // Optional: adds spacing between rows
+        contentContainerStyle={styles.listContent}
       />
     </View>
   );
@@ -25,7 +31,18 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    padding: 5,
+  },
+  row: {
+    justifyContent: "space-between",
+    // marginBottom: 10,
+  },
+  itemWrapper: {
+    flex: 1,
+    // marginHorizontal: 5,
+  },
+  listContent: {
+    // paddingBottom: 20,
   },
 });
 

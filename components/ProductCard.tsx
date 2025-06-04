@@ -1,7 +1,7 @@
 // src/components/ProductCard.tsx
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { darkTheme, lightTheme } from "../styles/theme";
+import { darkTheme } from "../styles/theme";
 import useColorScheme from "../utils/useColorScheme";
 
 type Product = {
@@ -23,7 +23,7 @@ type Props = {
 
 const ProductCard: React.FC<Props> = ({ product }) => {
   const colorScheme = useColorScheme();
-  const theme = darkTheme ;
+  const theme = darkTheme;
 
   return (
     <View style={[styles.card, { backgroundColor: theme.card }]}>
@@ -32,7 +32,9 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         style={styles.image}
         resizeMode="contain"
       />
-      <Text style={[styles.title, { color: theme.text }]}>{product.title}</Text>
+      <Text style={[styles.title, { color: theme.text }]} numberOfLines={2}>
+        {product.title}
+      </Text>
       <Text style={[styles.price, { color: theme.text }]}>
         ${product.price}
       </Text>
@@ -42,7 +44,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
 const styles = StyleSheet.create({
   card: {
-    margin: 10,
+    margin: 5,
     borderRadius: 8,
     padding: 10,
     shadowColor: "#000",
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    aspectRatio: 1, // or 2/3 or 3/4 depending on your images
+    aspectRatio: 1,
     borderRadius: 8,
   },
   title: {
